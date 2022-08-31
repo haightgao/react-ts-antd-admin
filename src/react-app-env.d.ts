@@ -19,7 +19,7 @@ declare global {
     }
   }
 
-  interface window {
+  interface Window {
     logout(): void
   }
 }

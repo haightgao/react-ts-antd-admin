@@ -10,7 +10,7 @@ request.interceptors.request.use((config) => {
   if (token) {
     config.headers = {
       ...config.headers,
-      authorization: token,
+      authorization: `Bearer ${token}`,
     }
   }
   return config
@@ -21,7 +21,9 @@ request.interceptors.response.use(
     return res.data
   },
   (error) => {
-    console.log(error)
+    if (error.response.status === 401) {
+      window.logout()
+    }
     message.error(error.message)
     return Promise.reject(error)
   }

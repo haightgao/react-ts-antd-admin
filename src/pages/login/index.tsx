@@ -1,15 +1,20 @@
 import { Button, Form, Input, message, Space } from 'antd'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { doLogin } from '../../api/login'
 import './login.scss'
 
 const Index = () => {
+  const navigate = useNavigate()
+
   function login(data: Login) {
-    console.log(data)
+    // console.log(data)
+
     doLogin(data).then((res) => {
       if (res.success) {
         console.log(res.data)
         localStorage.setItem('token', res.data.token)
+        navigate('/')
       } else {
         message.error(res.errorMessage)
       }
